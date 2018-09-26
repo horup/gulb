@@ -1,5 +1,7 @@
 // https://docs.rs/glutin/0.18.0/glutin/
 // https://docs.rs/winit/0.17.2/winit/
+// http://www.opengl-tutorial.org/beginners-tutorials/tutorial-2-the-first-triangle/
+
 extern crate winit;
 extern crate glutin;
 extern crate gl;
