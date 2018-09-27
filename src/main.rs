@@ -5,6 +5,7 @@
 extern crate winit;
 extern crate glutin;
 extern crate gl;
+extern crate cgmath;
 use winit::{WindowBuilder, EventsLoop, Event, WindowEvent};
 use winit::dpi::{LogicalSize};
 use glutin::{GlWindow, ContextBuilder, GlContext};
@@ -18,7 +19,7 @@ fn main()
     let mut events_loop = EventsLoop::new();
     let window_builder = WindowBuilder::new()
                 .with_title("Gulb!")
-                .with_dimensions(LogicalSize::new(640.0, 480.0));
+                .with_dimensions(LogicalSize::new(512.0, 512.0));
 
     let context_builder = ContextBuilder::new().with_vsync(true);
     let gl_window = GlWindow::new(window_builder, context_builder, &events_loop).unwrap();
@@ -53,7 +54,6 @@ fn main()
 
         unsafe 
         {
-            gl::Clear(gl::COLOR_BUFFER_BIT);
             render.draw();
         }
 
@@ -61,6 +61,6 @@ fn main()
 
         let diff:Duration = Instant::now() - now;
         let ms = diff.as_secs() as f64 + diff.subsec_micros() as f64 / 1000.0;
-     //   println!("{}", ms);
+        println!("{}", ms);
     }
 }
