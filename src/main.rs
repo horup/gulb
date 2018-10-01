@@ -11,8 +11,12 @@ use winit::dpi::{LogicalSize};
 use glutin::{GlWindow, ContextBuilder, GlContext};
 use std::time::{Instant, Duration};
 
+use gl::*;
+
+mod primitive;
 mod render;
 use self::render::{Render};
+use self::primitive::*;
 
 fn main() 
 {
@@ -26,11 +30,17 @@ fn main()
     
     let mut render = Render::new();
 
+    let mut prim = Primitive::new();
+    prim.scale = 0.01;
+    
+    render.set_primitive(0, prim);
     unsafe
     {
         gl_window.make_current().unwrap();
         gl::load_with(|symbol| gl_window.get_proc_address(symbol) as *const _);
         gl::ClearColor(0.0, 1.0, 0.0, 1.0);
+       // gl::Enable(POLYGON_SMOOTH);
+      //  gl::Enable(BLEND);
 
         render.init();
     }
@@ -54,6 +64,9 @@ fn main()
 
         unsafe 
         {
+            let primitive = render.get_primitive(0);
+            primitive.scale += 0.0001;
+            primitive.translate.x += 0.0001;
             render.draw();
         }
 
